@@ -14,10 +14,18 @@ args = parser.parse_args()
 
 with open(args.fname,newline='') as ifp:	
 	for line in ifp:
-	
-		# -- αντικαταστήστε με τον δικό σας κώδικα (αρχή) --
-
-		sys.stdout.write(line)
-
-		# -- αντικαταστήστε με τον δικό σας κώδικα (τέλος) --
+	           rexp = re.findall("(\d\d:\d\d:\d\d --> \d\d:\d\d:\d\d)", line)   //κανονικη εκφραση
+		   m = rexp.search(line)
+		
+		if m is None: 
+	            sys.stdout.write(line)
+		
+		
+		else:
+		    hours = int(m.group(1))   //Διαχωρισμος για  ωρες λεπτα δευτερολεπτα
+		    min=int(m.group(2))
+		    sec=int(m.group(3))
+			
+		    sum = hours*3600+min*60+sec+offset    //Προσθηκη offset
+		    sys.stdout.write(sum)
 
